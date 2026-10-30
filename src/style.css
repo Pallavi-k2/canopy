@@ -1,0 +1,59 @@
+/* Page styles. The illustration itself is drawn by PixiJS on a <canvas>. */
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden; /* no scrollbars, the scene always fits */
+  background: #f2ede3; /* warm cream paper (same as CONFIG.page.background) */
+}
+
+#app {
+  position: fixed;
+  inset: 0;
+}
+
+/* The first-visit hint (see src/hint.js). Its text lives in src/config.js. */
+.hint {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  margin: 0;
+  padding: 6px 0;
+  text-align: center;
+  text-wrap: balance; /* if it wraps, keep the lines even */
+  font-family: ui-rounded, 'SF Pro Rounded', 'Nunito', system-ui, sans-serif;
+  font-size: clamp(13px, 1.6vw, 17px);
+  letter-spacing: 0.02em;
+  color: #5d6b4b; /* soft leafy brown-green */
+  /* A cream glow behind the letters keeps them readable over leaves. */
+  text-shadow: 0 0 6px #f2ede3, 0 0 12px #f2ede3;
+  pointer-events: none; /* never gets in the way of drawing */
+  user-select: none;
+  opacity: 0;
+  transition: opacity var(--hint-fade, 1s) ease;
+}
+.hint.is-visible {
+  opacity: 0.85;
+  animation: hint-breathe 4s ease-in-out infinite;
+}
+.hint.is-gone {
+  opacity: 0;
+  animation: none;
+}
+@keyframes hint-breathe {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 0.55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hint.is-visible { animation: none; }
+}
+
+#app canvas {
+  display: block;
+  /* Stop phones from scrolling or zooming while you draw on the canvas. */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}

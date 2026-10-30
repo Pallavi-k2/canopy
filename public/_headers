@@ -1,0 +1,5 @@
+# Netlify reads this file from the uploaded site (it's copied into dist/ by
+# `npm run build`). Images and code in /assets/ get a unique name per version,
+# so browsers can keep them for a year; index.html is always fetched fresh.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

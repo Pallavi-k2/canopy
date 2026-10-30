@@ -1,0 +1,8 @@
+# Netlify settings (used automatically when you deploy from Git).
+# Caching rules live in public/_headers, so they also work with drag-and-drop.
+[build]
+  command = "npm run build"   # makes the website in the dist/ folder
+  publish = "dist"            # the folder Netlify puts online
+
+[build.environment]
+  NODE_VERSION = "20"
